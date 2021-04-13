@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
 
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
+import {Navbar, PopularList, TrendingList, LatestList, WatchList, WatchedList} from "./components"
+
+console.log(process.env.REACT_APP_TMDB_API_KEY);
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Navbar/>
+        <Switch>
+          <Route exact path="/">
+            <LatestList />
+          </Route>
+          <Route path="/trending">
+            <TrendingList/>
+          </Route>
+          <Route  path="/popular">
+            <PopularList/>
+          </Route>
+          <Route  path="/watchlist">
+            <WatchList/>
+          </Route>
+          <Route  path="/watched">
+            <WatchedList/>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
