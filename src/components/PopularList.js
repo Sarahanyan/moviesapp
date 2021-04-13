@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext} from "react"
+import { GlobalContext} from "./context"
 import {MoviesList} from "./MoviesList"
 
 export const PopularList = () => {
-    const [popularList, setPopularList] = useState([])
-    const fetchPopular = async () => {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=3`)
-        const movieData = await response.json()
-        console.log(movieData);
-        setPopularList(movieData.results)
-    }
+    const {popularMovies, fetchMovies, isLoadingData} = useContext(GlobalContext)
+    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=3`
+    console.log("popular Movies in PopularlIst.js", popularMovies);
 
     useEffect(() => {
-        fetchPopular()
+        fetchMovies(url, 'SET_POPULAR_MOVIES')
     }, [])
 
     return(
         <div>
             <h1>Popular</h1>
             <h3>Check out the most popular movies</h3>
-            <MoviesList movieslist={popularList}/>
+            {isLoadingData ? <h2>Loading...</h2> : <MoviesList movieslist={popularMovies}/>}       
         </div>
     )
 }

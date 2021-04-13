@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useContext } from "react"
+import {GlobalContext} from "./context"
 import {MoviesList} from "./MoviesList"
 
+
 export const TrendingList = () => {
-    const [trendingList, setTrendingList] = useState([])
-    const fetchTrending = async () => {
-        const response = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_TMDB_API_KEY}`)
-        const movieData = await response.json()
-        console.log(movieData);
-        setTrendingList(movieData.results)
-    }
+    const {fetchMovies, trendingMovies, isLoadingData} = useContext(GlobalContext)
+    const url=`https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_TMDB_API_KEY}`
 
     useEffect(() => {
-        fetchTrending()
+        fetchMovies(url, 'SET_TRENDING_MOVIES')
     }, [])
 
     return(
         <div>
             <h1>Trending</h1>
             <h3>Movies everyone is talking about this week</h3>
-            <MoviesList movieslist={trendingList}/>
+            {isLoadingData ? <h2>Loading...</h2> : <MoviesList movieslist={trendingMovies}/>}       
+
+            
         </div>
     )
 }

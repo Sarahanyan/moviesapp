@@ -42,3 +42,16 @@ img {
 .movie-card {
   width: 300px;
 }
+
+.movie-card-header > * {
+  margin-right: 1rem;
+  display: inline;
+}
+
+.alert-container {
+  display: none;
+}
+
+.show-alert-container {
+  display: block;
+}

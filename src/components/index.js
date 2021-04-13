@@ -5,7 +5,8 @@ import {TrendingList} from "./TrendingList"
 import {LatestList} from "./LatestList"
 import {WatchList} from "./WatchList"
 import {WatchedList} from "./Watched"
+import {Alert} from "./alert"
 
 export {
-    Navbar, MoviesList, PopularList, TrendingList, LatestList, WatchList, WatchedList
+    Navbar, MoviesList, PopularList, TrendingList, LatestList, WatchList, WatchedList, Alert
 }
