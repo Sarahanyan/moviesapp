@@ -6,6 +6,10 @@ const AppReducer = (state, action) => {
             return {...state, trendingMovies: action.payload}
         case 'SET_LATEST_MOVIES':
             return {...state, latestMovies: action.payload}
+        case 'SET_TOPRATED_MOVIES':
+            return {...state, topRatedMovies: action.payload}
+        case 'SET_MOVIE_SEARCH_RESULTS':
+            return {...state, searchResults: action.payload}
         case 'ADD_TO_WATCHLIST':
             return {...state, watchlist: [...state.watchlist, action.payload]}
         case 'ADD_TO_WATCHEDLIST':

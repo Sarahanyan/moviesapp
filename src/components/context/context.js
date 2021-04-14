@@ -5,6 +5,8 @@ const initialState = {
     popularMovies: [],
     trendingMovies: [],
     latestMovies: [],
+    topRatedMovies: [],
+    searchResults: [],
     watchlist: localStorage.getItem("watchlist") ? JSON.parse(localStorage.getItem("watchlist")) : [],
     watched: localStorage.getItem("watched") ? JSON.parse(localStorage.getItem("watched")) : [],
 }
@@ -13,6 +15,7 @@ export const GlobalContext = React.createContext()
 
 export const GlobalContextProvider = ({children}) => {
     const [isLoadingData, setIsLoadingData] =  useState(false)
+    const [searchTerm, setSearchTerm] = useState("")
     const [state, dispatch] = useReducer(AppReducer, initialState)
 
     const fetchMovies = async (url, actionForMovieType) => {
@@ -42,10 +45,14 @@ export const GlobalContextProvider = ({children}) => {
             fetchMovies,
             addToWatchList,
             addToWatchedList,
+            setSearchTerm,
+            searchTerm,
             isLoadingData,
             popularMovies: state.popularMovies,
             trendingMovies: state.trendingMovies,
             latestMovies: state.latestMovies,
+            topRatedMovies: state.topRatedMovies,
+            searchResults: state.searchResults,
             watchlist: state.watchlist,
             watched: state.watched,
         }}>

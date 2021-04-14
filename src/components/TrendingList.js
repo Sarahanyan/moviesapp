@@ -9,7 +9,7 @@ export const TrendingList = () => {
 
     useEffect(() => {
         fetchMovies(url, 'SET_TRENDING_MOVIES')
-    }, [])
+    }, [trendingMovies])
 
     return(
         <div>

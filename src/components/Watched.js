@@ -1,9 +1,10 @@
-import React, {useContext} from "react"
+import React, {useContext, useEffect} from "react"
 import { GlobalContext } from "./context"
 import {MoviesList} from "./MoviesList"
 
 export const WatchedList = () => {
     const {watched} = useContext(GlobalContext)
+
     return(
         <div>
             <h1>Watched</h1>

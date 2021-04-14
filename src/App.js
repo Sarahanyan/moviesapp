@@ -1,6 +1,6 @@
 import React from "react"
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
-import {Navbar, PopularList, TrendingList, LatestList, WatchList, WatchedList} from "./components"
+import {Navbar, PopularList, TrendingList, LatestList, TopRatedList, WatchList, WatchedList, SearchList} from "./components"
 import {GlobalContextProvider} from "./components/context/context.js"
 
 console.log(process.env.REACT_APP_TMDB_API_KEY);
@@ -20,11 +20,17 @@ function App() {
           <Route  path="/popular">
             <PopularList/>
           </Route>
+          <Route  path="/toprated">
+            <TopRatedList/>
+          </Route>
           <Route  path="/watchlist">
             <WatchList/>
           </Route>
           <Route  path="/watched">
             <WatchedList/>
+          </Route>
+          <Route  path="/search">
+            <SearchList/>
           </Route>
         </Switch>
       </Router>

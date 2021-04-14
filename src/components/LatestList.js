@@ -5,11 +5,13 @@ import {MoviesList} from "./MoviesList"
 
 export const LatestList = () => {
     const {fetchMovies, latestMovies, isLoadingData} = useContext(GlobalContext)
-    const url = `https://api.themoviedb.org/3/movie/latest?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`
+    const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`
+    
+    // const url = ` https://api.themoviedb.org/3/movie/top_rated?api_key=<<api_key>>&language=en-US&page=1`
 
     useEffect(() => {
         fetchMovies(url, 'SET_LATEST_MOVIES')
-    }, [])
+    }, [latestMovies])
 
     return(
         <div>
