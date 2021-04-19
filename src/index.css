@@ -55,3 +55,7 @@ img {
 .show-alert-container {
   display: block;
 }
+
+.movie-container {
+  min-height: 950px;
+}

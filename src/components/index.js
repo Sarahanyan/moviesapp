@@ -7,8 +7,9 @@ import {TopRatedList} from "./TopRatedList"
 import {WatchList} from "./WatchList"
 import {WatchedList} from "./Watched"
 import {SearchList} from "./SearchList"
+import {MoviePage} from "./moviepage"
 import {Alert} from "./alert"
 
 export {
-    Navbar, MoviesList, PopularList, TrendingList, LatestList, TopRatedList, WatchList, WatchedList, Alert, SearchList
+    Navbar, MoviesList, PopularList, TrendingList, LatestList, TopRatedList, WatchList, WatchedList, Alert, SearchList, MoviePage
 }

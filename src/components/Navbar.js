@@ -4,6 +4,7 @@ import { GlobalContext } from "./context"
 
 export const Navbar = () => {
     const {searchTerm, setSearchTerm} = useContext(GlobalContext)
+    console.log("in Navbar searchterm:", searchTerm);
     // const [searchTerm, setSearchTerm] = useState("")
 
     const handleChangeSearch = (event) => {

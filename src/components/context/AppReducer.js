@@ -10,6 +10,8 @@ const AppReducer = (state, action) => {
             return {...state, topRatedMovies: action.payload}
         case 'SET_MOVIE_SEARCH_RESULTS':
             return {...state, searchResults: action.payload}
+        case 'SET_SIMILAR_MOVIES':
+            return {...state, similarMovies: action.payload}
         case 'ADD_TO_WATCHLIST':
             return {...state, watchlist: [...state.watchlist, action.payload]}
         case 'ADD_TO_WATCHEDLIST':
@@ -20,3 +22,5 @@ const AppReducer = (state, action) => {
 }
 
 export default AppReducer
+
+// https://www.debuggr.io/react-update-unmounted-component/
