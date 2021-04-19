@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react"
 import {MoviesList} from "./MoviesList"
-import { GlobalContext } from "./context"
+import { GlobalContext } from "../context"
 
 export const SearchList = () => {
     const {searchTerm, fetchMovies, searchResults, isLoadingData} = useContext(GlobalContext)
@@ -10,7 +10,13 @@ export const SearchList = () => {
 
 
     useEffect(() => {
-        fetchMovies(url, 'SET_MOVIE_SEARCH_RESULTS')
+        let mounted = true
+        if(mounted){
+            fetchMovies(url, 'SET_MOVIE_SEARCH_RESULTS')
+        }
+
+        return () => mounted=false
+
     }, [])
 
     return(

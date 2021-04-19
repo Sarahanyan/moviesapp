@@ -1,8 +1,7 @@
 import React, { useEffect, useContext, useState} from "react"
-import {GlobalContext} from "./context"
+import {GlobalContext} from "../context"
 import {MoviesList} from "./MoviesList"
-import {Pages} from "./pages"
-
+import {Pages} from "../pagination"
 
 export const LatestList = () => {
     const {fetchMovies, latestMovies, isLoadingData} = useContext(GlobalContext)
@@ -12,9 +11,16 @@ export const LatestList = () => {
         console.log("latest Movies in latestlIst.js", latestMovies);
   
     useEffect(() => {
-        fetchMovies(url, 'SET_LATEST_MOVIES')
-        localStorage.setItem("pagenum", pageNo.toString())
-    }, [])
+        let mounted = true
+        if (mounted) {
+            fetchMovies(url, 'SET_LATEST_MOVIES')
+            localStorage.setItem("pagenum", pageNo.toString())
+        }
+
+        return () => {
+            mounted = false
+        }
+    }, [url])
 
     return(
         <div>

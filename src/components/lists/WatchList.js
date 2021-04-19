@@ -1,5 +1,5 @@
 import React, {useContext} from "react"
-import { GlobalContext } from "./context"
+import { GlobalContext } from "../context"
 import {MoviesList} from "./MoviesList"
 
 export const WatchList = () => {

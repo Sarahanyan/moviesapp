@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react"
-import {GlobalContext} from "./context"
+import {GlobalContext} from "../context"
 import {MoviesList} from "./MoviesList"
-import {Pages} from "./pages"
+import {Pages} from "../pagination"
 
 export const TopRatedList = () => {
     const {fetchMovies, topRatedMovies, isLoadingData} = useContext(GlobalContext)
@@ -13,9 +13,14 @@ export const TopRatedList = () => {
 
 
     useEffect(() => {
-        fetchMovies(url, 'SET_TOPRATED_MOVIES')
-        localStorage.setItem("pagenum", pageNo.toString())
-    }, [])
+        let mounted = true
+        if(mounted){
+            fetchMovies(url, 'SET_TOPRATED_MOVIES')
+            localStorage.setItem("pagenum", pageNo.toString())
+        }
+
+        return () => mounted=false
+        }, [url])
 
     return(
         <div>

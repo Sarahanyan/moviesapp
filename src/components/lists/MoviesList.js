@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import {MovieCard} from "./moviecard.js"
+import {MovieCard} from "../moviecard"
 
 export const MoviesList = (props) => {
     const {movieslist} = props

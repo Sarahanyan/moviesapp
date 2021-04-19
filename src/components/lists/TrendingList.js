@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react"
-import {GlobalContext} from "./context"
+import {GlobalContext} from "../context"
 import {MoviesList} from "./MoviesList"
 
 
@@ -10,7 +10,14 @@ export const TrendingList = () => {
     console.log("trending Movies in trendinglIst.js", trendingMovies);
 
     useEffect(() => {
-        fetchMovies(url, 'SET_TRENDING_MOVIES')
+        let mounted = true
+
+        if(mounted){
+            fetchMovies(url, 'SET_TRENDING_MOVIES')
+        }
+
+        return () => mounted=false
+
     }, [])
 
     return(

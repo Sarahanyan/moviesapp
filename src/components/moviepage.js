@@ -1,31 +1,40 @@
 import React, {useContext, useEffect, useState} from "react"
 import {useParams} from "react-router-dom"
 import {GlobalContext} from "./context"
-import {MoviesList} from "./MoviesList"
+import {MoviesList} from "./lists/MoviesList"
 import {Alert} from "."
 
 export const MoviePage = () => {
     const {id} = useParams()
-    const {similarMovies, fetchMovies, isLoadingData} = useContext(GlobalContext)
+    const {similarMovies, fetchMovies, isLoadingData, watchlist, 
+                watched, addToWatchList, addToWatchedList} = useContext(GlobalContext)
+
     const [movie, setMovie] = useState({})
     const {overview, title, vote_average, poster_path, release_date, genres, vote_count} = movie
+
     const imgUrl = `https://image.tmdb.org/t/p/w500/${poster_path}`
     const similarMoviesUrl = `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=1`
-    const {watchlist, watched, addToWatchList} = useContext(GlobalContext)
+        
     const inWatchList = movie ? watchlist.find((item) => item.id === movie.id) : false
     const inWatched = movie ? watched.find((item) => item.id === movie.id) : false
     const [alertMsg, setAlertMsg] = useState("")
     const [showAlert, setShowAlert] = useState("")
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`).then(response => {
-            return response.json()
-            }
-        ).then((data) => {
-            console.log(data);
-            setMovie(data)
-            fetchMovies(similarMoviesUrl, "SET_SIMILAR_MOVIES")
-        })
+        let mounted = true
+        if (mounted) {
+            fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`).then(response => {
+                return response.json()
+                }
+            ).then((data) => {
+                console.log(data);
+                setMovie(data)
+                fetchMovies(similarMoviesUrl, "SET_SIMILAR_MOVIES")
+            })
+            
+        }
+
+        return () => mounted=false
 
     }, [])
 
@@ -42,6 +51,19 @@ export const MoviePage = () => {
         }
     }
 
+    const handleAddToWatched = (movie) => {
+        if (inWatched) {
+            setAlertMsg("Already in watched")
+            setShowAlert(true)
+            console.log(alertMsg);
+        }else{
+            setAlertMsg("Added to watched")
+            setShowAlert(true)
+            console.log(alertMsg);
+            addToWatchedList(movie)
+        }
+    }
+
     return(
         <div className="movie-card">
             <Alert message={alertMsg} showAlert={showAlert} setShowAlert={setShowAlert}/>
@@ -53,7 +75,7 @@ export const MoviePage = () => {
                 { !inWatchList && 
                     <i className="fas fa-plus" onClick={() => handleAddToWatchList(movie)}></i>
                 }
-                {(!inWatched) && <i className="fas fa-eye"></i>}
+                {(!inWatched) && <i className="fas fa-eye" onClick={() => handleAddToWatched(movie)}></i>}
                 </div>
             </div>
             <p>{overview}</p>
