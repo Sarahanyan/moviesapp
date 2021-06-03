@@ -16,7 +16,8 @@ export const TrendingList = () => {
             fetchMovies(url, 'SET_TRENDING_MOVIES')
         }
 
-        return () => mounted=false
+        return () => {
+            mounted=false}
 
     }, [])
 

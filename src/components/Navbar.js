@@ -1,15 +1,21 @@
 import React, { useState, useContext } from "react"
 import {Link} from "react-router-dom"
 import { GlobalContext } from "./context"
+import { SearchForm } from "./searchform"
 
 export const Navbar = () => {
-    const {searchTerm, setSearchTerm} = useContext(GlobalContext)
+    const {searchTerm, setSearchTerm, fetchMovies} = useContext(GlobalContext)
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${searchTerm}&page=1&include_adult=false`
     console.log("in Navbar searchterm:", searchTerm);
     // const [searchTerm, setSearchTerm] = useState("")
 
     const handleChangeSearch = (event) => {
         event.preventDefault()
         setSearchTerm(event.target.value)
+    }
+
+    const handleSubmit = (searchquery) => {
+        fetchMovies(url, 'SET_MOVIE_SEARCH_RESULTS')
     }
 
     return(
@@ -58,9 +64,18 @@ export const Navbar = () => {
             </div>
 
             <div>
-                <Link to="/search">
-                    <input type="text" value={searchTerm} onChange={handleChangeSearch} className="search" />
-                </Link>
+                {/* <Link to="/search"> */}
+
+                {/* <SearchForm /> */}
+                {/* </Link> */}
+                {/* <Link to="/search">
+                    <form method="GET" onSubmit={(event) => {
+                        event.preventDefault()
+                        handleSubmit(searchTerm)}}>
+                        <input type="text" value={searchTerm} onChange={handleChangeSearch} className="search" />
+                        <button>search</button>
+                    </form>
+                </Link> */}
             </div>
         </nav>
     )

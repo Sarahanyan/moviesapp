@@ -9,7 +9,9 @@ import {WatchedList} from "./lists/Watched"
 import {SearchList} from "./lists/SearchList"
 import {MoviePage} from "./moviepage"
 import {Alert} from "./alert"
+import {SearchForm} from "./searchform"
+
 
 export {
-    Navbar, MoviesList, PopularList, TrendingList, LatestList, TopRatedList, WatchList, WatchedList, Alert, SearchList, MoviePage
+    Navbar, MoviesList, PopularList, TrendingList, LatestList, TopRatedList, WatchList, WatchedList, Alert, SearchList, MoviePage, SearchForm
 }

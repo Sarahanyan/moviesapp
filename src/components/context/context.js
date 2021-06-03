@@ -17,6 +17,7 @@ export const GlobalContext = React.createContext()
 export const GlobalContextProvider = ({children}) => {
     const [isLoadingData, setIsLoadingData] =  useState(false)
     const [searchTerm, setSearchTerm] = useState("")
+    const [searchResultsMsg, setSearchResultsMsg] = useState("")
     const [state, dispatch] = useReducer(AppReducer, initialState)
 
     const fetchMovies = useCallback(async (url, actionForMovieType) => {
@@ -35,6 +36,14 @@ export const GlobalContextProvider = ({children}) => {
         dispatch({type:'ADD_TO_WATCHEDLIST', payload: movie})
     }
 
+    const removeFromWatchList = (movie) => {
+        dispatch({type:'REMOVE_FROM_WATCHLIST', payload: movie})
+    }
+
+    const removeFromWatched = (movie) => {
+        dispatch({type:'REMOVE_FROM_WATCHEDLIST', payload: movie})
+    }
+
     useEffect(() => {
         localStorage.setItem("watchlist", JSON.stringify(state.watchlist))
         localStorage.setItem("watched", JSON.stringify(state.watched))
@@ -45,8 +54,12 @@ export const GlobalContextProvider = ({children}) => {
             fetchMovies,
             addToWatchList,
             addToWatchedList,
-            setSearchTerm,
+            removeFromWatchList,
+            removeFromWatched,
             searchTerm,
+            setSearchTerm,
+            searchResultsMsg,
+            setSearchResultsMsg,
             isLoadingData,
             popularMovies: state.popularMovies,
             trendingMovies: state.trendingMovies,

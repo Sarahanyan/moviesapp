@@ -6,7 +6,8 @@ import {Alert} from "."
 export const MovieCard = ({singleMovie}) => {
     const {id, overview,title, vote_average, backdrop_path} = singleMovie
     const imgUrl = `https://image.tmdb.org/t/p/w500/${backdrop_path}`
-    const {watchlist, watched, addToWatchList, addToWatchedList} = useContext(GlobalContext)
+    const {watchlist, watched, addToWatchList, addToWatchedList, 
+            removeFromWatchList, removeFromWatched} = useContext(GlobalContext)
     const inWatchList = watchlist.find((item) => item.id === singleMovie.id)
     const inWatched = watched.find((item) => item.id === singleMovie.id)
     const [alertMsg, setAlertMsg] = useState("")
@@ -48,10 +49,17 @@ export const MovieCard = ({singleMovie}) => {
                     <span>{vote_average}</span>
                     <div className="movie-card-btns">
                     { !inWatchList && 
-                        <i className="fas fa-plus" onClick={() => handleAddToWatchList(singleMovie)}></i>
+                        <i className="fas fa-plus" title="add to watch list" onClick={() => handleAddToWatchList(singleMovie)}></i>
                     }
                     {(!inWatched) && 
-                        <i className="fas fa-eye" onClick={() => handleAddToWatched(singleMovie)}></i>}
+                        <i className="fas fa-eye" title="add to watched list" onClick={() => handleAddToWatched(singleMovie)}></i>
+                    }
+                    {inWatchList && 
+                        <i className="fas fa-trash" title="remove from watch list" onClick={() => removeFromWatchList(singleMovie)}></i>
+                    }
+                    {inWatched && 
+                        <i className="fas fa-eye-slash" title="remove from watched list" onClick={() => removeFromWatched(singleMovie)}></i>
+                    }
                     </div>
                 </div>
                 <p>{overview}</p>
