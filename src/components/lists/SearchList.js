@@ -12,9 +12,10 @@ export const SearchList = () => {
     }, [searchTerm, searchResults])
 
     return(
-        <div> 
+        <div className="movies-wrapper"> 
+            <h1 className="list-title">Find any movie</h1>
             {isLoadingData ? <h2>Loading...</h2> : <>
-                <h2>{searchResultsMsg}</h2>
+                <h3 className="list-subtitle">{searchResultsMsg}</h3>
                 <MoviesList movieslist={searchResults}/>
                 </>
             }

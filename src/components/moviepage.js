@@ -7,7 +7,8 @@ import {Alert} from "."
 export const MoviePage = () => {
     const {id} = useParams()
     const {similarMovies, fetchMovies, isLoadingData, watchlist, 
-                watched, addToWatchList, addToWatchedList} = useContext(GlobalContext)
+                watched, addToWatchList, addToWatchedList, removeFromWatched, removeFromWatchList
+                    } = useContext(GlobalContext)
 
     const [movie, setMovie] = useState({})
     const {overview, title, vote_average, poster_path, release_date, genres, vote_count} = movie
@@ -50,7 +51,6 @@ export const MoviePage = () => {
             addToWatchList(movie)
         }
     }
-
     const handleAddToWatched = (movie) => {
         if (inWatched) {
             setAlertMsg("Already in watched")
@@ -65,20 +65,37 @@ export const MoviePage = () => {
     }
 
     return(
-        <div className="movie-card">
-            <Alert message={alertMsg} showAlert={showAlert} setShowAlert={setShowAlert}/>
-            <img src={imgUrl} alt={`${title} movie poster`} />
-            <div className="movie-card-header">
-                <h3>{title}</h3>
-                <span>{vote_average}</span>
-                <div className="movie-card-btns">
-                { !inWatchList && 
-                    <i className="fas fa-plus" onClick={() => handleAddToWatchList(movie)}></i>
-                }
-                {(!inWatched) && <i className="fas fa-eye" onClick={() => handleAddToWatched(movie)}></i>}
+        <div className="movie-page">
+            <div className="single-movie-cont">
+                <h2>{title}</h2>
+                <img src={imgUrl} alt={`${title} movie poster`} />
+                <div className="single-movie-details">
+                    <Alert message={alertMsg} showAlert={showAlert} setShowAlert={setShowAlert}/>
+                    <div className="movie-card-icons">
+                        <span>
+                            <i className="fas fa-star"></i>
+                            <span>{vote_average}</span>
+                        </span>
+                        <span>
+                            { !inWatchList && 
+                                <i className="fas fa-plus" title="add to watch list" onClick={() => handleAddToWatchList(movie)}></i>
+                            }
+                            {(!inWatched) && 
+                                <i className="fas fa-eye" title="add to watched list" onClick={() => handleAddToWatched(movie)}></i>
+                            }
+                            {inWatchList && 
+                                <i className="fas fa-trash" title="remove from watch list" onClick={() => removeFromWatchList(movie)}></i>
+                            }
+                            {inWatched && 
+                                <i className="fas fa-eye-slash" title="remove from watched list" onClick={() => removeFromWatched(movie)}></i>
+                            }
+                        </span>
+                    </div>
+                    <div className="movie-overview">
+                        <p>{overview ? overview : "This movie does not have an overview"}</p>
+                    </div>
                 </div>
             </div>
-            <p>{overview}</p>
             
             <h3>Similar Movies</h3>
             {isLoadingData ? <h2>Loading...</h2> : <MoviesList movieslist={similarMovies}/>}

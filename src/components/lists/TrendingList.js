@@ -22,9 +22,9 @@ export const TrendingList = () => {
     }, [])
 
     return(
-        <div>
-            <h1>Trending</h1>
-            <h3>Movies everyone is talking about this week</h3>
+        <div className="movies-wrapper">
+            <h1 className="list-title">Trending</h1>
+            <h3 className="list-subtitle">Movies everyone is talking about this week</h3>
             {isLoadingData ? <h2>Loading...</h2> : <MoviesList movieslist={trendingMovies}/>} 
             
         </div>

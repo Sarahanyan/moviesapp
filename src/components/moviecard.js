@@ -39,31 +39,39 @@ export const MovieCard = ({singleMovie}) => {
     }
 
     return(
-        <div className="movie-card">
+        <div className="movie-card" >
+            <div className="movie-card-header">
                 <Alert message={alertMsg} showAlert={showAlert} setShowAlert={setShowAlert}/>
                 <Link to={`/movies/${id}`}>
-                    <img src={imgUrl} alt={`${title} movie poster`} />
-                </Link>
-                <div className="movie-card-header">
-                    <h3>{title}</h3>
-                    <span>{vote_average}</span>
-                    <div className="movie-card-btns">
-                    { !inWatchList && 
-                        <i className="fas fa-plus" title="add to watch list" onClick={() => handleAddToWatchList(singleMovie)}></i>
-                    }
-                    {(!inWatched) && 
-                        <i className="fas fa-eye" title="add to watched list" onClick={() => handleAddToWatched(singleMovie)}></i>
-                    }
-                    {inWatchList && 
-                        <i className="fas fa-trash" title="remove from watch list" onClick={() => removeFromWatchList(singleMovie)}></i>
-                    }
-                    {inWatched && 
-                        <i className="fas fa-eye-slash" title="remove from watched list" onClick={() => removeFromWatched(singleMovie)}></i>
-                    }
+                    <div className="movie-img">
+                        <img src={imgUrl} alt={`${title} movie poster`} />
                     </div>
-                </div>
-                <p>{overview}</p>
-                
+                </Link>
+                    <div className="movie-card-icons">
+                        <span>
+                            <i className="fas fa-star"></i>
+                            <span>{vote_average}</span>
+                        </span>
+                        <span>
+                            { !inWatchList && 
+                                <i className="fas fa-plus" title="add to watch list" onClick={() => handleAddToWatchList(singleMovie)}></i>
+                            }
+                            {(!inWatched) && 
+                                <i className="fas fa-eye" title="add to watched list" onClick={() => handleAddToWatched(singleMovie)}></i>
+                            }
+                            {inWatchList && 
+                                <i className="fas fa-trash" title="remove from watch list" onClick={() => removeFromWatchList(singleMovie)}></i>
+                            }
+                            {inWatched && 
+                                <i className="fas fa-eye-slash" title="remove from watched list" onClick={() => removeFromWatched(singleMovie)}></i>
+                            }
+                        </span>
+                    </div>
+                    <h4>{title}</h4>
             </div>
+            <div className="movie-description">
+                <p>{overview ? overview : "This movie does not have an overview"}</p>
+            </div>  
+        </div>
     )
 }

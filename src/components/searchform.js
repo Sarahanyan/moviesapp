@@ -21,17 +21,22 @@ export const SearchForm = () => {
     }
 
     return(
-        <div>
-            <Link to="/search">
+        <div className="search-bar">
                 <form method="GET" onSubmit={(event) => {
                     event.preventDefault()
                     handleSubmit(searchTerm)}}>
+                    <span className="search-icon-cont">
+                     <i className="fas fa-search fa-lg"></i>
+                    </span>
                     <input type="text" value={searchTerm} onChange={handleChangeSearch} className="search" />
                     <button type="submit" onClick={(event) => {
-                    event.preventDefault()
-                    handleSubmit(searchTerm)}}>search</button>
+                            event.preventDefault()
+                        handleSubmit(searchTerm)}}>
+                    <Link to="/search">
+                        search
+                    </Link>
+                    </button>
                 </form>
-            </Link>
         </div>
     )
 }

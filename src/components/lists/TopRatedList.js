@@ -23,9 +23,9 @@ export const TopRatedList = () => {
         }, [url])
 
     return(
-        <div>
-            <h1>TOP RATED MOVIES</h1>
-            <h3>These movies have the highest rating</h3>
+        <div className="movies-wrapper">
+            <h1 className="list-title">Top Rated Movies</h1>
+            <h3 className="list-subtitle">These movies have the highest rating</h3>
             {isLoadingData ? <h2>Loading...</h2> : <MoviesList movieslist={topRatedMovies}/>}
             <Pages pageno={pageNo} setPageNo={setPageNo} isLoadingData={isLoadingData}/>      
         </div>

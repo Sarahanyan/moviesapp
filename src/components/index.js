@@ -10,8 +10,9 @@ import {SearchList} from "./lists/SearchList"
 import {MoviePage} from "./moviepage"
 import {Alert} from "./alert"
 import {SearchForm} from "./searchform"
-
+import {Logo} from "./logo"
+import { MobileNav } from "./mobile-nav"
 
 export {
-    Navbar, MoviesList, PopularList, TrendingList, LatestList, TopRatedList, WatchList, WatchedList, Alert, SearchList, MoviePage, SearchForm
+    Navbar, MoviesList, PopularList, TrendingList, LatestList, TopRatedList, WatchList, WatchedList, Alert, SearchList, MoviePage, SearchForm, Logo, MobileNav
 }

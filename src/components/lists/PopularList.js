@@ -21,9 +21,9 @@ export const PopularList = () => {
     }, [url])
 
     return(
-        <div>
-            <h1>Popular</h1>
-            <h3>Check out the most popular movies</h3>
+        <div className="movies-wrapper">
+            <h1 className="list-title">Popular</h1>
+            <h3 className="list-subtitle">Check out the most popular movies</h3>
             {isLoadingData ? <h2>Loading...</h2> : <MoviesList movieslist={popularMovies}/>}
             <Pages pageno={pageNo} setPageNo={setPageNo} isLoadingData={isLoadingData}/>
         </div>

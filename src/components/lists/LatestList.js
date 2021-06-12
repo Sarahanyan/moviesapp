@@ -23,9 +23,9 @@ export const LatestList = () => {
     }, [url])
 
     return(
-        <div>
-            <h1>Latest</h1>
-            <h3>Keep up with the latest releases</h3>
+        <div className="movies-wrapper">
+            <h1 className="list-title">Latest</h1>
+            <h3 className="list-subtitle">Keep up with the latest releases</h3>
             {isLoadingData ? <h2>Loading...</h2> : <MoviesList movieslist={latestMovies}/>}   
             <Pages pageno={pageNo} setPageNo={setPageNo} isLoadingData={isLoadingData}/>
     
